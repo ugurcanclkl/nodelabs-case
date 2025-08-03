@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  api:
+    build: ./api
+    ports: ["3000:3000"]
+    env_file: ./deploy/env/api.env
+    environment:               
+      - ELASTIC_URL=http://elastic:9200
+    depends_on:
+      elastic:
+        condition: service_healthy
+      mongo:
+        condition: service_started
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+
+  worker:
+    build: ./worker
+    env_file: ./deploy/env/worker.env
+    depends_on: 
+      mongo: 
+        condition: service_started
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+
+
+  mongo:
+    image: mongo:7
+    volumes: [mongo-data:/data/db]
+
+  redis:
+    image: redis:7
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports: ["15672:15672"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  elastic:
+    image: elasticsearch:8.14.0
+    container_name: nodelabs-case-elastic
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+    ports: ["9200:9200"]
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    healthcheck: 
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 | grep -q 'You Know, for Search'"]
+      interval: 15s
+      retries: 10
+
+volumes:
+  mongo-data:
+  esdata:

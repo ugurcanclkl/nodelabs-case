@@ -1,0 +1,36 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "tsc -p .",
+    "start": "node dist/consumer.js",
+    "seed": "ts-node src/scripts/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.19.0",
+    "amqplib": "^0.10.8",
+    "dotenv": "^17.2.1",
+    "mongoose": "^8.17.0",
+    "pino": "^9.7.0",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.7",
+    "@types/elasticsearch": "^5.0.43",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.1.0",
+    "@types/socket.io": "^3.0.1",
+    "@types/socket.io-client": "^3.0.0",
+    "eslint": "^9.32.0",
+    "prettier": "^3.6.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  }
+}
