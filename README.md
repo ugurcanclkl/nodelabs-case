@@ -106,7 +106,7 @@ scripts/
 
 ---
 
-## 🧹 6 · Lint, test, rebuild
+## 🧹 6 · Lint, rebuild
 
 ```bash
 npm --prefix api run lint            
