@@ -21,7 +21,7 @@ A full‑stack playground that shows how to build a **Real‑time messenger** wi
 
 ```bash
 # 0. clone
-$ git clone https://github.com/<you>/nodelabs-case.git && cd nodelabs-case
+$ git clone https://github.com/ugurcanclkl/nodelabs-case.git && cd nodelabs-case
 
 # 1. generate an INTERNAL_TOKEN so the worker can call the API
 chmod +x generate-token.sh
