@@ -106,16 +106,6 @@ scripts/
 
 ---
 
-## 🧹 6 · Lint, rebuild
-
-```bash
-npm --prefix api run lint            
-./generate-token.sh           
-docker compose up --build      
-```
-
----
-
 ## 📄 License
 
 MIT – use for learning & experiments.
